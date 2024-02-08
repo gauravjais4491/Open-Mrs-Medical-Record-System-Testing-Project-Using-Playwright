@@ -1,3 +1,0 @@
-passed
-should create an account with password less than eight character
-Heyy
