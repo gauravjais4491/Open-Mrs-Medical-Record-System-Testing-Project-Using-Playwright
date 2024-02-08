@@ -1,0 +1,11 @@
+node_modules/
+/test-results/
+/playwright-report/
+/playwright/.cache/
+/package.json
+/package-lock.json
+/playwright.config.js
+/LoginAuthCQ.json
+
+
+
