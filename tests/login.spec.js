@@ -6,7 +6,7 @@ const LoginPage = require('../pageObject/loginPage/loginPage.js')
 const SecurePageForLogin = require('../pageObject/loginPage/securePageForLogin')
 
 
-test.only('should login', async () => {
+test('should login', async () => {
     const browser = await chromium.launch();
     const context = await browser.newContext();
     await context.clearCookies()
