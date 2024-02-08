@@ -1,0 +1,42 @@
+{
+    "url": "https://demo.openmrs.org/openmrs/login.htm",
+    "username": "Gaurav",
+    "password": "Mayank@2222",
+    "confirmPassword": "Mayank@2222",
+    "location": "Registration Desk",
+    "FamilyName": "Jaiswal",
+    "GivenName": "Nidhi",
+    "gender": "Male",
+    "privilegeLevelText": "Full",
+    "differentPassword":{
+        "password":"Mayank@2223",
+        "confirmPassword":"Mayank@2222"
+    },
+    "passwordLessThanEightDigit":{
+        "password":"May@12",
+        "confirmPassword":"May@12"
+    },
+    "capabilities": [
+        "Administers System",
+        "Schedules And Overbooks Appointments",
+        "Configures Appointment Scheduling",
+        "Configures Forms",
+        "Edits Existing Encounters",
+        "Enters Vitals",
+        "Manages Atlas",
+        "Records Allergies",
+        "Requests Appointments",
+        "Schedules Appointments",
+        "Uses Capture Vitals App",
+        "Writes Clinical Notes",
+        "Configures Metadata",
+        "Enters ADT Events",
+        "Has Super User Privileges",
+        "Manages Provider Schedules",
+        "Registers Patients",
+        "Sees Appointment Schedule",
+        "Uses Patient Summary"
+    ],
+    "idenfier":"Hacker",
+    "providerRoleText":"Clinical Doctor"
+}

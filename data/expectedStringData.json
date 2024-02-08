@@ -1,0 +1,9 @@
+{
+    "expectTextForSucessfullyCreatedUser":"Account Saved Successfully",
+    "expectTextForPasswordNotMatch":"Passwords don't match",
+    "expectTextForPasswordLessThanEightCharacters":"At least 8 character(s) are required",
+    "expectTextForLoginSuccessfull":"Logout",
+    "expectTextForAddPatientDetailsPage":"Register a patient",
+    "expectTextForSucessfullyPatientRegistered":"Created Patient Record: Gaurav Kumar Jaiswal",
+    "expectTextForSucessfullySechduledAppointment":"Gaurav Kumar Jaiswal started a visit"
+}
