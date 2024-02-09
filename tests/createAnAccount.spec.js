@@ -4,19 +4,6 @@ const userData = JSON.parse(JSON.stringify(json))
 const { customTest } = require('../fixtures/createAccount-Fixtures')
 const expectedString = require('../data/expectedStringData.json')
 
-
-// let createNewAccount
-// let securePageForCreateNewAccount
-
-// test.beforeEach(async ({ page }) => {
-// createNewAccount = CreateNewAccount.createInstance(page)
-// securePageForCreateNewAccount = SecurePageForCreateNewAccount.createInstance(page)
-//     notification = Notification.createInstance(page)
-//     await page.goto(userData.url)
-//     await createNewAccount.goToSystemAdministrationPage()
-//     await createNewAccount.goToManageAccountsPage()
-// })
-
 customTest('should create an account', async ({ createNewAccount, notification }) => {
     await createNewAccount.addPersonDetails(userData.FamilyName, userData.GivenName, userData.gender)
     await createNewAccount.addUserAccountDetails(userData.GivenName, userData.privilegeLevelText, userData.password, userData.confirmPassword)
