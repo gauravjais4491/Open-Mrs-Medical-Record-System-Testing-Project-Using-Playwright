@@ -8,7 +8,6 @@ const SecurePageForLogin = require('../pageObject/loginPage/securePageForLogin')
 
 test('should login', async (testInfo) => {
     const browser = await chromium.launch();
-    console.log(testInfo.title);
     const context = await browser.newContext();
     await context.clearCookies()
     const page = await context.newPage();
@@ -17,11 +16,11 @@ test('should login', async (testInfo) => {
     await page.goto(userData.url)
     await loginPage.login(userData.username, userData.password, userData.location)
     expect.soft(await securePageForLogin.flashLoginSuccessfull()).toContain(expectedString.expectTextForLoginSuccessfull)
+    console.log(testInfo.title);
 })
 
 test('should login with admin', async (testInfo) => {
     const browser = await chromium.launch();
-    console.log(testInfo.title);
     const context = await browser.newContext();
     await context.clearCookies()
     const page = await context.newPage();
@@ -30,5 +29,6 @@ test('should login with admin', async (testInfo) => {
     await page.goto(userData.url)
     await loginPage.login(adminData.adminUsername, adminData.adminPassword, userData.location)
     expect.soft(await securePageForLogin.flashLoginSuccessfull()).toContain(expectedString.expectTextForLoginSuccessfull)
+    console.log(testInfo.title);
 })
 
