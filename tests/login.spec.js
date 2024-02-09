@@ -8,19 +8,20 @@ const SecurePageForLogin = require('../pageObject/loginPage/securePageForLogin')
 
 test('should login', async (testInfo) => {
     const browser = await chromium.launch();
+    console.log(testInfo.title);
     const context = await browser.newContext();
     await context.clearCookies()
     const page = await context.newPage();
     const loginPage = LoginPage.createInstance(page)
     const securePageForLogin = SecurePageForLogin.createInstance(page)
     await page.goto(userData.url)
-    console.log(testInfo.title);
     await loginPage.login(userData.username, userData.password, userData.location)
     expect.soft(await securePageForLogin.flashLoginSuccessfull()).toContain(expectedString.expectTextForLoginSuccessfull)
 })
 
-test('should login with admin', async () => {
+test('should login with admin', async (testInfo) => {
     const browser = await chromium.launch();
+    console.log(testInfo.title);
     const context = await browser.newContext();
     await context.clearCookies()
     const page = await context.newPage();
