@@ -4,8 +4,8 @@ on:
     branches: [Gaurav, main]
   pull_request:
     branches: [Gaurav, main]
-  schedule:
-    - cron: "*/5 * * * *"
+  # schedule:
+    # - cron: "*/5 * * * *"
 jobs:
   test:
     timeout-minutes: 60
