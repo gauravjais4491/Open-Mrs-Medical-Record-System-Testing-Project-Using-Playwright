@@ -13,7 +13,6 @@ class SecurePageForAddPatient {
     async flashNotification() {
         let notificationText = null;
         notificationText = await this.flashAlert.textContent();
-        console.log(notificationText);
         return notificationText;
     }
 }

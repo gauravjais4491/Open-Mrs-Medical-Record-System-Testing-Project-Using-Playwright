@@ -1,11 +1,11 @@
-const { test, expect, chromium, mergeTests } = require("@playwright/test")
+const { test, expect } = require("@playwright/test")
 const userData = require('../data/userData.json')
 const expectedString = require('../data/expectedStringData.json')
-const adminData = require('../data/adminData.json')
 const { customTest } = require('../fixtures/addPatient-Fixtures')
 
 
-customTest("Add Patient Flow", async ({ securePageForAddPatient, testDataForAddPatient, addPatient, notification, page, sechduleAppointment }) => {
+customTest("Add Patient Flow", async ({ securePageForAddPatient, testDataForAddPatient, addPatient, notification, page, sechduleAppointment }, testInfo) => {
+    console.log(testInfo.title);
     await test.step("should go to add patient details page", async () => {
         await page.goto(userData.url)
         await addPatient.goToPatientDetailsPage()

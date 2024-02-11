@@ -3,9 +3,7 @@ const createNewAccount = require('../pageObject/manageAccountsFlow/createNewAcco
 const notification = require('../pageObject/notification/notification')
 const securePageForCreateNewAccount = require('../pageObject/manageAccountsFlow/createNewAccount/secure.page')
 const userData = require('../data/userData.json')
-const securePageForAddPatient = require('../pageObject/addPatientFlow/addPatient/secureAddPatient')
-const addPatient = require('../pageObject/addPatientFlow/addPatient/addPatientDetails')
-const sechduleAppointment = require('../pageObject/addPatientFlow/sechduleAppointment/sechduleAppointment.js')
+const generateData = require('../data/GenerateData')
 
 exports.customTest = base.test.extend({
     createNewAccount: async ({ page, createInstanceForNewAccount }, use) => {
@@ -14,11 +12,20 @@ exports.customTest = base.test.extend({
         await createInstanceForNewAccount.goToManageAccountsPage()
         await use(createInstanceForNewAccount);
     },
+    // givenName: async ({ createInstanceForGenerateData }, use) => {
+    //     await use(createInstanceForGenerateData.generateGivenName())
+
+    // },
     createInstanceForNewAccount: async ({ page }, use) => {
         await use(createNewAccount.createInstance(page))
     },
     notification: async ({ page }, use) => {
         await use(notification.createInstance(page));
+    },
+
+    // why to pass argument
+    generateData: async ({ page }, use) => {
+        await use(generateData.createInstance(page))
     },
     securePageForCreateNewAccount: async ({ page }, use) => {
         await use(securePageForCreateNewAccount.createInstance(page))
