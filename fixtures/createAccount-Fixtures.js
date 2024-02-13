@@ -12,10 +12,6 @@ exports.customTest = base.test.extend({
         await createInstanceForNewAccount.goToManageAccountsPage()
         await use(createInstanceForNewAccount);
     },
-    // givenName: async ({ createInstanceForGenerateData }, use) => {
-    //     await use(createInstanceForGenerateData.generateGivenName())
-
-    // },
     createInstanceForNewAccount: async ({ page }, use) => {
         await use(createNewAccount.createInstance(page))
     },

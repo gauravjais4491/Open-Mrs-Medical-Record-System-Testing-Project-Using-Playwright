@@ -4,6 +4,7 @@ const userData = JSON.parse(JSON.stringify(json))
 const { customTest } = require('../fixtures/createAccount-Fixtures')
 const expectedString = require('../data/expectedStringData.json')
 const generateData = require('../data/GenerateData')
+// const dotenv = require('../')
 
 let givenName
 
@@ -32,7 +33,7 @@ customTest('should create an account with password less than eight character', a
 
 customTest('should create an account with password and confirm password not matching', async ({ createNewAccount, securePageForCreateNewAccount }, testInfo) => {
     console.log(testInfo.title);
-    await createNewAccount.addPersonDetails(userData.FamilyName, userData.GivenName, userData.gender)
+    await createNewAccount.addPersonDetails(userData.FamilyName, givenName, userData.gender)
     await createNewAccount.addUserAccountDetails(userData.GivenName, userData.privilegeLevelText, userData.differentPassword.password, userData.differentPassword.confirmPassword)
     expect.soft(await securePageForCreateNewAccount.flashPasswordNotMatch()).toContain(expectedString.expectTextForPasswordNotMatch)
 })
