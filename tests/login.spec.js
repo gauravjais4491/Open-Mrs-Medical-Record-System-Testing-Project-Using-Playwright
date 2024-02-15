@@ -5,7 +5,7 @@ const expectedString = require('../data/expectedStringData.json')
 const adminData = require('../data/adminData.json')
 
 
-customTest('should login', async ({ loginPage, securePageForLogin, context, page }) => {
+customTest('should login', async ({ loginPage, securePageForLogin, context, page },testInfo) => {
     await context.clearCookies()
     await page.goto(userData.url)
     await loginPage.login(userData.username, userData.password, userData.location)
@@ -13,7 +13,7 @@ customTest('should login', async ({ loginPage, securePageForLogin, context, page
     console.log(testInfo.title);
 })
 
-customTest('should login with admin', async ({ loginPage, securePageForLogin }) => {
+customTest('should login with admin', async ({ loginPage, securePageForLogin, context, page },testInfo) => {
     await context.clearCookies()
     await page.goto(userData.url)
     await loginPage.login(adminData.adminUsername, adminData.adminPassword, userData.location)
