@@ -1,5 +1,34 @@
 {
-    "adminUsername":"Admin",
-    "adminPassword":"Admin123",
-    "expectedStringForAdminLogin":"Logged in as Super User (admin) at Registration Desk."
+    "adminUsername": "Admin",
+    "adminPassword": "Admin123",
+    "expectedStringForAdminLogin": "Logged in as Super User (admin) at Registration Desk.",
+    "familyName": "Jaiswal",
+    "givenName": "Gaurav",
+    "gender": "Male",
+    "privilegeLevelText": "Full",
+    "password": "Mayank@2222",
+    "confirmPassword": "Mayank@2222",
+    "capabilities": [
+        "Administers System",
+        "Schedules And Overbooks Appointments",
+        "Configures Appointment Scheduling",
+        "Configures Forms",
+        "Edits Existing Encounters",
+        "Enters Vitals",
+        "Manages Atlas",
+        "Records Allergies",
+        "Requests Appointments",
+        "Schedules Appointments",
+        "Uses Capture Vitals App",
+        "Writes Clinical Notes",
+        "Configures Metadata",
+        "Enters ADT Events",
+        "Has Super User Privileges",
+        "Manages Provider Schedules",
+        "Registers Patients",
+        "Sees Appointment Schedule",
+        "Uses Patient Summary"
+    ],
+    "idenfier": "Hacker",
+    "providerRoleText": "Clinical Doctor"
 }

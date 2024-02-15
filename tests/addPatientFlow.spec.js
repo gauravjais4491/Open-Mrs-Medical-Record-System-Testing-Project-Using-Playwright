@@ -9,7 +9,6 @@ customTest("Add Patient Flow", async ({ securePageForAddPatient, testDataForAddP
     await test.step("should go to add patient details page", async () => {
         await page.goto(userData.url)
         await addPatient.goToPatientDetailsPage()
-        // await expect.soft(securePageForAddPatient).toBeVisible()
         expect.soft(await securePageForAddPatient.flashNotification()).toContain(expectedString.expectTextForAddPatientDetailsPage);
     });
 

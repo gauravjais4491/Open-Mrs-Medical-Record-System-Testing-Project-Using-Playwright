@@ -3,16 +3,12 @@ const json = require('../data/userData.json')
 const userData = JSON.parse(JSON.stringify(json))
 const { customTest } = require('../fixtures/createAccount-Fixtures')
 const expectedString = require('../data/expectedStringData.json')
-const generateData = require('../data/GenerateData')
-// const dotenv = require('../')
 
 let givenName
 
 customTest.beforeEach('should generate given name', async ({generateData}) => {
     givenName = await generateData.generateGivenName();
 })
-
-
 
 customTest('should create an account', async ({ createNewAccount, notification }, testInfo) => {
     console.log(testInfo.title);
@@ -27,13 +23,13 @@ customTest('should create an account', async ({ createNewAccount, notification }
 customTest('should create an account with password less than eight character', async ({ createNewAccount, securePageForCreateNewAccount }, testInfo) => {
     console.log(testInfo.title);
     await createNewAccount.addPersonDetails(userData.FamilyName, givenName, userData.gender)
-    await createNewAccount.addUserAccountDetails(userData.GivenName, userData.privilegeLevelText, userData.passwordLessThanEightDigit.password, userData.passwordLessThanEightDigit.confirmPassword)
+    await createNewAccount.addUserAccountDetails(givenName, userData.privilegeLevelText, userData.passwordLessThanEightDigit.password, userData.passwordLessThanEightDigit.confirmPassword)
     expect.soft(await securePageForCreateNewAccount.flashPasswordLessThanEightCharacter()).toContain(expectedString.expectTextForPasswordLessThanEightCharacters)
 })
 
 customTest('should create an account with password and confirm password not matching', async ({ createNewAccount, securePageForCreateNewAccount }, testInfo) => {
     console.log(testInfo.title);
     await createNewAccount.addPersonDetails(userData.FamilyName, givenName, userData.gender)
-    await createNewAccount.addUserAccountDetails(userData.GivenName, userData.privilegeLevelText, userData.differentPassword.password, userData.differentPassword.confirmPassword)
+    await createNewAccount.addUserAccountDetails(givenName, userData.privilegeLevelText, userData.differentPassword.password, userData.differentPassword.confirmPassword)
     expect.soft(await securePageForCreateNewAccount.flashPasswordNotMatch()).toContain(expectedString.expectTextForPasswordNotMatch)
 })
