@@ -1,14 +1,12 @@
-class SecurePageForAddPatient {
+class SecurePageForHomePage {
     constructor(page) {
         this.page = page
     }
-
     static createInstance(page) {
-        return new SecurePageForAddPatient(page);
+        return new SecurePageForHomePage(page)
     }
-
     get flashAlert() {
-        return this.page.locator('#content > h2')
+        return this.page.locator('#content').locator('>h2')
     }
     async flashNotification() {
         let notificationText = null;
@@ -16,5 +14,4 @@ class SecurePageForAddPatient {
         return notificationText;
     }
 }
-
-module.exports = SecurePageForAddPatient;
+module.exports = SecurePageForHomePage

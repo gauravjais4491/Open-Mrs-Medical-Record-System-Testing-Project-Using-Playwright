@@ -5,9 +5,6 @@ class AddPatient {
     static createInstance(page) {
         return new AddPatient(page)
     }
-    get registerPatientBtn() {
-        return this.page.getByText('Register a patient')
-    }
     get NextButton() {
         return this.page.locator(`#next-button`)
     }
@@ -62,11 +59,11 @@ class AddPatient {
     get Confirm() {
         return this.page.locator(`#submit`)
     }
+    get patientIdBtn() {
+        return this.page.locator('.float-sm-right').locator('>span')
+    }
     get CancelSubmission() {
         return this.page.locator(`#cancelSubmission`)
-    }
-    async goToPatientDetailsPage() {
-        await this.registerPatientBtn.click()
     }
 
     async addPatientName(firstName, middleName, familyName) {
@@ -107,6 +104,9 @@ class AddPatient {
     }
     async confirmDetails() {
         await this.Confirm.click()
+    }
+    async getPatientId() {
+        return (await this.patientIdBtn.textContent()).trim()
     }
 }
 

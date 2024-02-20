@@ -1,8 +1,9 @@
 const base = require('@playwright/test')
-const notification = require('../pageObject/notification/notification')
-const securePageForAddPatient = require('../pageObject/addPatientFlow/addPatient/secureAddPatient')
-const addPatient = require('../pageObject/addPatientFlow/addPatient/addPatientDetails')
-const sechduleAppointment = require('../pageObject/addPatientFlow/sechduleAppointment/sechduleAppointment.js')
+import Notification from '../pageObject/notification/notification'
+import SecurePageForAddPatient from '../pageObject/addPatient/secureAddPatient'
+import AddPatient from '../pageObject/addPatient/addPatientDetails'
+import HomePage from '../pageObject/homePageFlow/homePage.js'
+import SecurePageForHomePage from '../pageObject/homePageFlow/securePageForHomePage'
 
 exports.customTest = base.test.extend({
     testDataForAddPatient: {
@@ -23,17 +24,19 @@ exports.customTest = base.test.extend({
         relativeOccupation: "Doctor",
         relativeName: "Noob"
     },
+    homePage: async ({ page }, use) => {
+        await use(HomePage.createInstance(page))
+    },
+    securePageForHomePage: async ({ page }, use) => {
+        await use(SecurePageForHomePage.createInstance(page))
+    },
     notification: async ({ page }, use) => {
-        await use(notification.createInstance(page));
+        await use(Notification.createInstance(page));
     },
     securePageForAddPatient: async ({ page }, use) => {
-        await use(securePageForAddPatient.createInstance(page))
+        await use(SecurePageForAddPatient.createInstance(page))
     },
     addPatient: async ({ page }, use) => {
-        await use(addPatient.createInstance(page))
-    },
-    sechduleAppointment: async ({ page }, use) => {
-        await use(sechduleAppointment.createInstance(page))
-    },
-
+        await use(AddPatient.createInstance(page))
+    }
 })

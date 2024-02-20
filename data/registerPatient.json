@@ -1,0 +1,18 @@
+{
+    "firstName": "Gaurav",
+    "middleName": "Kumar",
+    "lastName": "Jaiswal",
+    "birthDayDate": "29",
+    "birthDayMonth": "10",
+    "birthDayYear": "2022",
+    "patientGender": "Male",
+    "address": "TestVagrant Technology",
+    "address2": "Near Mi Showroom",
+    "city": "Banglore",
+    "state": "Karnataka",
+    "country": "India",
+    "postalCode": "560008",
+    "patientPhoneNumber": "1234567890",
+    "relativeOccupation": "Doctor",
+    "relativeName": "Noob"
+}

@@ -2,17 +2,22 @@ class Notification {
     constructor(page) {
         this.page = page;
     }
-    createInstance(page) {
+    static createInstance(page) {
         return new Notification(page)
     }
     get notification() {
-        return this.page.locator(`[class="toast-item-close"]`).locator('+p');
+        return this.page.locator(`[class="toast-item toast-type-success"] > p`)
     }
     async flashNotification() {
-        await this.notification.waitFor()
         let notificationText = null;
-        notificationText = await this.notification.textContent();
-        return notificationText
+        while (notificationText === null) {
+            try {
+                notificationText = await this.notification.textContent({ timeout: 500 });
+            } catch (e) {
+                continue;
+            }
+            return notificationText;
+        }
     }
 }
-module.exports = new Notification()
+module.exports = Notification

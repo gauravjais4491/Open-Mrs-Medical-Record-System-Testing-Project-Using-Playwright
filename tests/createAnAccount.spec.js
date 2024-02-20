@@ -1,35 +1,31 @@
 const { expect } = require("@playwright/test")
-const json = require('../data/userData.json')
-const userData = JSON.parse(JSON.stringify(json))
-const { customTest } = require('../fixtures/createAccount-Fixtures')
-const expectedString = require('../data/expectedStringData.json')
+import createAccountData from '../data/createAccount.json'
+import { customTest } from '../fixtures/createAccount-Fixtures'
+import expectedString from '../data/expectedStringData.json'
 
 let givenName
 
-customTest.beforeEach('should generate given name', async ({generateData}) => {
+customTest.beforeEach('should generate given name', async ({ generateData }) => {
     givenName = await generateData.generateGivenName();
 })
 
-customTest('should create an account', async ({ createNewAccount, notification }, testInfo) => {
-    console.log(testInfo.title);
-    await createNewAccount.addPersonDetails(userData.FamilyName, givenName, userData.gender)
-    await createNewAccount.addUserAccountDetails(givenName, userData.privilegeLevelText, userData.password, userData.confirmPassword)
-    await createNewAccount.addCapablitiesToUserAccount(userData.capabilities)
-    await createNewAccount.addProviderDetails(userData.idenfier, userData.providerRoleText)
+customTest('should create an account', async ({ createNewAccount, notification }) => {
+    await createNewAccount.addPersonDetails(createAccountData.familyName, givenName, createAccountData.gender)
+    await createNewAccount.addUserAccountDetails(givenName, createAccountData.privilegeLevelText, createAccountData.password, createAccountData.confirmPassword)
+    await createNewAccount.addCapablitiesToUserAccount(createAccountData.capabilities)
+    await createNewAccount.addProviderDetails(createAccountData.idenfier, createAccountData.providerRoleText)
     await createNewAccount.saveDetailsBtn()
     expect.soft(await notification.flashNotification()).toContain(expectedString.expectTextForSucessfullyCreatedUser)
 })
 
-customTest('should create an account with password less than eight character', async ({ createNewAccount, securePageForCreateNewAccount }, testInfo) => {
-    console.log(testInfo.title);
-    await createNewAccount.addPersonDetails(userData.FamilyName, givenName, userData.gender)
-    await createNewAccount.addUserAccountDetails(givenName, userData.privilegeLevelText, userData.passwordLessThanEightDigit.password, userData.passwordLessThanEightDigit.confirmPassword)
+customTest('should create an account with password less than eight character', async ({ createNewAccount, securePageForCreateNewAccount }) => {
+    await createNewAccount.addPersonDetails(createAccountData.familyName, givenName, createAccountData.gender)
+    await createNewAccount.addUserAccountDetails(givenName, createAccountData.privilegeLevelText, createAccountData.passwordLessThanEightDigit.password, createAccountData.passwordLessThanEightDigit.confirmPassword)
     expect.soft(await securePageForCreateNewAccount.flashPasswordLessThanEightCharacter()).toContain(expectedString.expectTextForPasswordLessThanEightCharacters)
 })
 
-customTest('should create an account with password and confirm password not matching', async ({ createNewAccount, securePageForCreateNewAccount }, testInfo) => {
-    console.log(testInfo.title);
-    await createNewAccount.addPersonDetails(userData.FamilyName, givenName, userData.gender)
-    await createNewAccount.addUserAccountDetails(givenName, userData.privilegeLevelText, userData.differentPassword.password, userData.differentPassword.confirmPassword)
+customTest('should create an account with password and confirm password not matching', async ({ createNewAccount, securePageForCreateNewAccount }) => {
+    await createNewAccount.addPersonDetails(createAccountData.familyName, givenName, createAccountData.gender)
+    await createNewAccount.addUserAccountDetails(givenName, createAccountData.privilegeLevelText, createAccountData.differentPassword.password, createAccountData.differentPassword.confirmPassword)
     expect.soft(await securePageForCreateNewAccount.flashPasswordNotMatch()).toContain(expectedString.expectTextForPasswordNotMatch)
 })
