@@ -46,6 +46,7 @@ const globalSetup = async () => {
     } catch (error) {
         let count = 0;
         await loginPage.login(adminData.adminUsername, adminData.adminPassword, adminData.location)
+        await loginPage.lookForLogoutBtn()
         expect(await securePageForLogin.flashLoginSuccessfull()).toContain(expectedString.expectTextForLoginSuccessfull)
 
         await createNewAccount.goToSystemAdministrationPage()
