@@ -17,7 +17,8 @@ customTest("Schedule Appointment", async ({ sechduleAppointment, notification, s
     await deleteData.deletePropertyFromJsonFile(patientRecordData.patientId1)
 });
 
-customTest("Start Visit", async ({ startVisit, notification, patientRecordPage, deleteData }) => {
+customTest("Start Visit", async ({ startVisit, notification, patientRecordPage, deleteData }, testInfo) => {
+    console.log(testInfo.title);
     await patientRecordPage.searchPatient(patientRecordData.patientId2)
     await startVisit.visit()
     await notification.flashNotification(expectedString.expectTextForSucessfullyVisitStarted)
@@ -25,7 +26,8 @@ customTest("Start Visit", async ({ startVisit, notification, patientRecordPage, 
     await deleteData.deletePropertyFromJsonFile(patientRecordData.patientId2)
 });
 
-customTest('Delete Patient', async ({ deletePatient, notification, patientRecordPage, deleteData }) => {
+customTest('Delete Patient', async ({ deletePatient, notification, patientRecordPage, deleteData }, testInfo) => {
+    console.log(testInfo.title);
     await patientRecordPage.searchPatient(patientRecordData.patientId3)
     await deletePatient.delete(patientRecordData.reason)
     expect(await notification.flashNotification()).toContain(expectedString.expectTextForDeletePatientSucessfully)

@@ -4,6 +4,7 @@ const { customTest } = require('../fixtures/addPatient-Fixtures')
 
 
 customTest("Add Patient Flow", async ({ testDataForAddPatient, addPatient, notification, page, homePage, securePageForHomePage }, testInfo) => {
+    console.log(testInfo.title);
     await test.step("should go to add patient details page", async () => {
         await page.goto('/')
         await homePage.goToPatientDetailsPage()
