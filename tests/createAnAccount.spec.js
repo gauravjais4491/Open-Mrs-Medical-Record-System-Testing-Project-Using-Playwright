@@ -9,7 +9,7 @@ customTest.beforeEach('should generate given name', async ({ generateData }) => 
     givenName = await generateData.generateGivenName();
 })
 
-customTest('should create an account', async ({ createNewAccount, notification }) => {
+customTest('should create an account', async ({ createNewAccount, notification }, testInfo) => {
     console.log(testInfo.title);
     await createNewAccount.addPersonDetails(createAccountData.familyName, givenName, createAccountData.gender)
     await createNewAccount.addUserAccountDetails(givenName, createAccountData.privilegeLevelText, createAccountData.password, createAccountData.confirmPassword)
