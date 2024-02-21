@@ -2,9 +2,6 @@ class Notification {
     constructor(page) {
         this.page = page;
     }
-    static createInstance(page) {
-        return new Notification(page)
-    }
     get notification() {
         return this.page.locator(`[class="toast-item toast-type-success"] > p`)
     }

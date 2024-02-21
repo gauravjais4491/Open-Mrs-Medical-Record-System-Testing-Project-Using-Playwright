@@ -2,9 +2,6 @@ class SecurePageForLogin {
     constructor(page) {
         this.page = page;
     }
-    static createInstance(page) {
-        return new SecurePageForLogin(page)
-    }
     get flashAlert() {
         return this.page.locator(`.nav-item.logout > a`)
     }

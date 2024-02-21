@@ -2,9 +2,6 @@ class DeletePatient {
     constructor(page) {
         this.page = page
     }
-    static createInstance(page) {
-        return new DeletePatient(page)
-    }
     get deletePatientBtn() {
         return this.page.getByRole('link', { name: 'Delete Patient' })
     }

@@ -2,9 +2,6 @@ class StartVisit {
     constructor(page) {
         this.page = page
     }
-    static createInstance(page) {
-        return new StartVisit(page)
-    }
     get visitBtn() {
         return this.page.getByRole('link', { name: 'Start Visit' })
     }

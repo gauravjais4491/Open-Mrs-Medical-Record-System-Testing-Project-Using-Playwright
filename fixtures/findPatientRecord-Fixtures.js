@@ -13,11 +13,11 @@ import SaveData from '../HandleJsonData/saveData.js'
 
 exports.customTest = base.test.extend({
     sechduleAppointment: async ({ page }, use) => {
-        await use(SechduleAppointment.createInstance(page))
+        await use(new SechduleAppointment(page))
     },
 
     addPatient: async ({ page }, use) => {
-        await use(AddPatient.createInstance(page))
+        await use(new AddPatient(page))
     },
 
     page: async ({ page }, use) => {
@@ -25,34 +25,34 @@ exports.customTest = base.test.extend({
     },
 
     notification: async ({ page }, use) => {
-        await use(Notification.createInstance(page));
+        await use(new Notification(page));
     },
 
     startVisit: async ({ page }, use) => {
-        await use(StartVisit.createInstance(page))
+        await use(new StartVisit(page))
     },
 
     homePage: async ({ page }, use) => {
-        await use(HomePage.createInstance(page))
+        await use(new HomePage(page))
     },
 
     patientRecordPage: async ({ page }, use) => {
-        await use(PatientRecordPage.createInstance(page))
+        await use(new PatientRecordPage(page))
     },
 
     deletePatient: async ({ page }, use) => {
-        await use(DeletePatient.createInstance(page))
+        await use(new DeletePatient(page))
     },
 
     securePageForSechduleAppointment: async ({ page }, use) => {
-        await use(SecurePageForSechduleAppointment.createInstance(page))
+        await use(new SecurePageForSechduleAppointment(page))
     },
 
     deleteData: async ({ page }, use) => {
-        await use(DeleteData.createInstance(page))
+        await use(new DeleteData(page))
     },
 
     saveData: async ({ page }, use) => {
-        await use(SaveData.createInstance(page))
+        await use(new SaveData(page))
     }
 })

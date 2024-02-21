@@ -2,9 +2,6 @@ class PatientRecordPage {
     constructor(page) {
         this.page = page
     }
-    static createInstance(page) {
-        return new PatientRecordPage(page)
-    }
     get searchBox() {
         return this.page.getByPlaceholder('Search by ID or Name')
     }

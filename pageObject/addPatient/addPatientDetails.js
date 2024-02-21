@@ -2,9 +2,6 @@ class AddPatient {
     constructor(page) {
         this.page = page
     }
-    static createInstance(page) {
-        return new AddPatient(page)
-    }
     get NextButton() {
         return this.page.locator(`#next-button`)
     }

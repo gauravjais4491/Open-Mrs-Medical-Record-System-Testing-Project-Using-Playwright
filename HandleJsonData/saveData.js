@@ -4,9 +4,6 @@ class SaveData {
     constructor(page) {
         this.page = page
     }
-    static createInstance(page) {
-        return new SaveData(page)
-    }
 
     async savePatientIdToJson(patientId) {
         const filePath = './data/patientRecord.json';

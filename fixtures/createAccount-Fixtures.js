@@ -12,17 +12,17 @@ exports.customTest = base.test.extend({
         await use(createInstanceForNewAccount);
     },
     createInstanceForNewAccount: async ({ page }, use) => {
-        await use(CreateNewAccount.createInstance(page))
+        await use(new CreateNewAccount(page))
     },
     notification: async ({ page }, use) => {
-        await use(Notification.createInstance(page));
+        await use(new Notification(page));
     },
 
     // why to pass argument
     generateData: async ({ page }, use) => {
-        await use(GenerateData.createInstance(page))
+        await use(new GenerateData(page))
     },
     securePageForCreateNewAccount: async ({ page }, use) => {
-        await use(SecurePageForCreateNewAccount.createInstance(page))
+        await use(new SecurePageForCreateNewAccount(page))
     }
 })

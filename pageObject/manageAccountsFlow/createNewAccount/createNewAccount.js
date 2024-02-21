@@ -2,9 +2,6 @@ class CreateNewAccount {
     constructor(page) {
         this.page = page;
     }
-    static createInstance(page) {
-        return new CreateNewAccount(page)
-    }
     get systemAdministrationButton() {
         return this.page.getByText("System Administration")
     }

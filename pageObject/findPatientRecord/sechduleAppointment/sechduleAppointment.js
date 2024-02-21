@@ -1,8 +1,4 @@
 class ScheduleAppointment {
-
-    static createInstance(page) {
-        return new ScheduleAppointment(page)
-    }
     constructor(page) {
         this.page = page
     }

@@ -2,9 +2,6 @@ class SecurePageForHomePage {
     constructor(page) {
         this.page = page
     }
-    static createInstance(page) {
-        return new SecurePageForHomePage(page)
-    }
     get flashAlert() {
         return this.page.locator('#content').locator('>h2')
     }

@@ -4,9 +4,6 @@ class GenerateData {
         this.page = page
         this.usernameRegex = /^[a-zA-Z0-9._-]{2,50}$/;
     }
-    static createInstance() {
-        return new GenerateData()
-    }
     async generateGivenName() {
         let randomName = faker.name.findName();
         let isValidUsername = this.usernameRegex.test(randomName);

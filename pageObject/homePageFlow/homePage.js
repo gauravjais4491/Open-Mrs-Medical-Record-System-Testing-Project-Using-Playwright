@@ -2,9 +2,6 @@ class HomePage {
     constructor(page) {
         this.page = page
     }
-    static createInstance(page) {
-        return new HomePage(page)
-    }
     get patientRecordBtn() {
         return this.page.getByRole('link', { name: 'Find Patient Record' })
     }

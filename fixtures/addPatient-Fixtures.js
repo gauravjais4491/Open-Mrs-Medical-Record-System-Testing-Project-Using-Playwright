@@ -1,6 +1,5 @@
 const base = require('@playwright/test')
 import Notification from '../pageObject/notification/notification'
-import SecurePageForAddPatient from '../pageObject/addPatient/secureAddPatient'
 import AddPatient from '../pageObject/addPatient/addPatientDetails'
 import HomePage from '../pageObject/homePageFlow/homePage.js'
 import SecurePageForHomePage from '../pageObject/homePageFlow/securePageForHomePage'
@@ -25,18 +24,15 @@ exports.customTest = base.test.extend({
         relativeName: "Noob"
     },
     homePage: async ({ page }, use) => {
-        await use(HomePage.createInstance(page))
+        await use(new HomePage(page))
     },
     securePageForHomePage: async ({ page }, use) => {
-        await use(SecurePageForHomePage.createInstance(page))
+        await use(new SecurePageForHomePage(page))
     },
     notification: async ({ page }, use) => {
-        await use(Notification.createInstance(page));
-    },
-    securePageForAddPatient: async ({ page }, use) => {
-        await use(SecurePageForAddPatient.createInstance(page))
+        await use(new Notification(page));
     },
     addPatient: async ({ page }, use) => {
-        await use(AddPatient.createInstance(page))
+        await use(new AddPatient(page))
     }
 })

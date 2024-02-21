@@ -2,9 +2,6 @@ class LoginPage {
     constructor(page) {
         this.page = page
     }
-    static createInstance(page) {
-        return new LoginPage(page)
-    }
     get inputUsername() {
         return this.page.locator('#username')
     }

@@ -4,9 +4,6 @@ class DeleteData {
     constructor(page) {
         this.page = page
     }
-    static createInstance(page) {
-        return new DeleteData(page)
-    }
     async deletePropertyFromJsonFile(patientId) {
         const filePath = './data/patientRecord.json'
         try {

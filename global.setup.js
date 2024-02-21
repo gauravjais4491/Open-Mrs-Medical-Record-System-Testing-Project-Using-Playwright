@@ -15,13 +15,13 @@ const globalSetup = async () => {
     const browser = await chromium.launch();
     const context = await browser.newContext();
     const page = await context.newPage();
-    const createNewAccount = CreateNewAccount.createInstance(page)
-    const notification = Notification.createInstance(page)
-    const loginPage = LoginPage.createInstance(page)
-    const securePageForLogin = SecurePageForLogin.createInstance(page)
-    const homePage = HomePage.createInstance(page)
-    const addPatient = AddPatient.createInstance(page)
-    const saveData = SaveData.createInstance(page)
+    const createNewAccount = new CreateNewAccount(page)
+    const notification = new Notification(page)
+    const loginPage = new LoginPage(page)
+    const securePageForLogin = new SecurePageForLogin(page)
+    const homePage = new HomePage(page)
+    const addPatient = new AddPatient(page)
+    const saveData = new SaveData(page)
     const locatorForHomeIcon = '#breadcrumbs > li> a > i'
     await page.goto('https://demo.openmrs.org/openmrs/login.htm')
     try {
