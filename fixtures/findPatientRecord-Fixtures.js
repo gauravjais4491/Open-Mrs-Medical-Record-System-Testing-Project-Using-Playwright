@@ -5,21 +5,14 @@ import StartVisit from '../pageObject/findPatientRecord/startVisitFlow/startVisi
 import HomePage from '../pageObject/homePageFlow/homePage.js'
 import PatientRecordPage from '../pageObject/findPatientRecord/patientRecordPage.js'
 import DeletePatient from '../pageObject/findPatientRecord/deletePatientFlow/deletePatient.js'
-import AddPatient from '../pageObject/addPatient/addPatientDetails'
 import SecurePageForSechduleAppointment from '../pageObject/findPatientRecord/sechduleAppointment/securePageForSechduleAppointment.js'
 import DeleteData from '../HandleJsonData/deleteData.js'
-import SaveData from '../HandleJsonData/saveData.js'
 
 
 exports.customTest = base.test.extend({
     sechduleAppointment: async ({ page }, use) => {
         await use(new SechduleAppointment(page))
     },
-
-    addPatient: async ({ page }, use) => {
-        await use(new AddPatient(page))
-    },
-
     page: async ({ page }, use) => {
         await use(page)
     },
@@ -50,9 +43,5 @@ exports.customTest = base.test.extend({
 
     deleteData: async ({ page }, use) => {
         await use(new DeleteData(page))
-    },
-
-    saveData: async ({ page }, use) => {
-        await use(new SaveData(page))
     }
 })

@@ -7,6 +7,9 @@ exports.customTest = base.test.extend({
     loginPage: async ({ page }, use) => {
         await use(new LoginPage(page))
     },
+    page: async ({ page }, use) => {
+        await use(page)
+    },
     securePageForLogin: async ({ page }, use) => {
         await use(new SecurePageForLogin(page))
     }

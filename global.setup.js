@@ -13,16 +13,18 @@ import registerPatientData from './data/registerPatient.json';
 import createAccountData from './data/createAccount.json'
 const globalSetup = async () => {
     const locatorForHomeIcon = '#breadcrumbs > li> a > i'
+    const browser = await chromium.launch();
+    const context = await browser.newContext();
+    const page = await context.newPage();
+    const loginPage = new LoginPage(page)
+    const securePageForLogin = new SecurePageForLogin(page)
+    const homePage = new HomePage(page)
+    const addPatient = new AddPatient(page)
+    const saveData = new SaveData(page)
+    const createNewAccount = new CreateNewAccount(page)
+    const notification = new Notification(page)
+    await page.goto('https://demo.openmrs.org/openmrs/login.htm')
     try {
-        const browser = await chromium.launch();
-        const context = await browser.newContext();
-        const page = await context.newPage();
-        const loginPage = new LoginPage(page)
-        const securePageForLogin = new SecurePageForLogin(page)
-        const homePage = new HomePage(page)
-        const addPatient = new AddPatient(page)
-        const saveData = new SaveData(page)
-        await page.goto('https://demo.openmrs.org/openmrs/login.htm')
         await loginPage.login(userData.username, userData.password, userData.location)
         expect(await securePageForLogin.flashLoginSuccessfull()).toContain(expectedString.expectTextForLoginSuccessfull)
         await loginPage.lookForLogoutBtn()
@@ -41,15 +43,8 @@ const globalSetup = async () => {
             await saveData.savePatientIdToJson(patientId);
             await page.locator(locatorForHomeIcon).click()
         }
-        await browser.close()
     } catch (error) {
-        const browser = await chromium.launch();
-        const context = await browser.newContext();
-        const page = await context.newPage();
-        const createNewAccount = new CreateNewAccount(page)
-        const notification = new Notification(page)
-        const loginPage = new LoginPage(page)
-        const securePageForLogin = new SecurePageForLogin(page)
+
         await page.goto('https://demo.openmrs.org/openmrs/login.htm')
         let count = 0;
         await loginPage.login(adminData.adminUsername, adminData.adminPassword, adminData.location)
@@ -69,8 +64,8 @@ const globalSetup = async () => {
             count++
             await globalSetup()
         }
-        await browser.close()
     }
+    await browser.close()
 };
 
 export default globalSetup;

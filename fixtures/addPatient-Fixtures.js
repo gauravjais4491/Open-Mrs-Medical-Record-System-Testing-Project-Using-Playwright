@@ -23,6 +23,9 @@ exports.customTest = base.test.extend({
         relativeOccupation: "Doctor",
         relativeName: "Noob"
     },
+    page: async ({ page }, use) => {
+        await use(page)
+    },
     homePage: async ({ page }, use) => {
         await use(new HomePage(page))
     },
