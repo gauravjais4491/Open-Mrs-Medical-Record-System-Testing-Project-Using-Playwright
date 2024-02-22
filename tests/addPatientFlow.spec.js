@@ -1,11 +1,10 @@
 const { test, expect } = require("@playwright/test")
 const expectedString = require('../data/expectedStringData.json')
 const { customTest } = require('../fixtures/addPatient-Fixtures')
-import Notification from '../pageObject/notification/notification.js'
 
-customTest("Add Patient Flow", async ({ testDataForAddPatient, addPatient, page, homePage, securePageForHomePage }, testInfo) => {
+
+customTest("Add Patient Flow", async ({ testDataForAddPatient, addPatient, notification, page, homePage, securePageForHomePage }, testInfo) => {
     console.log(testInfo.title);
-    const notification = new Notification(page)
     await test.step("should go to add patient details page", async () => {
         await page.goto('/')
         await homePage.goToPatientDetailsPage()
