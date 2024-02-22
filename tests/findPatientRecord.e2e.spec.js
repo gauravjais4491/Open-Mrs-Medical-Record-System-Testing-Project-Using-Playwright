@@ -21,7 +21,6 @@ customTest("Start Visit", async ({ startVisit, notification, patientRecordPage, 
     console.log(testInfo.title);
     await patientRecordPage.searchPatient(patientRecordData.patientId2)
     await startVisit.visit()
-    await notification.flashNotification(expectedString.expectTextForSucessfullyVisitStarted)
     expect(await notification.flashNotification()).toContain(expectedString.expectTextForSucessfullyVisitStarted)
     await deleteData.deletePropertyFromJsonFile(patientRecordData.patientId2)
 });
