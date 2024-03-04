@@ -21,6 +21,7 @@ exports.customTest = base.test.extend({
     },
     page: async ({ context }, use) => {
         const page = await context.newPage()
+        await page.goto('/')
         await use(page)
     },
     createInstanceForNewAccount: async ({ page }, use) => {
