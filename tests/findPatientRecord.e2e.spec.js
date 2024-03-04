@@ -7,7 +7,7 @@ customTest.beforeEach(async ({ homePage }) => {
     await homePage.goToPatientRecordPage()
 })
 
-customTest("Schedule Appointment", async ({ sechduleAppointment, notification, securePageForSechduleAppointment, patientRecordPage, deleteData }) => {
+customTest("Schedule Appointment @sechdule", async ({ sechduleAppointment, notification, securePageForSechduleAppointment, patientRecordPage, deleteData }) => {
     await patientRecordPage.searchPatient(patientRecordData.patientId1)
     await expect(await securePageForSechduleAppointment.flashAlert()).not.toBeVisible()
     await sechduleAppointment.addAppointmentDetails(patientRecordData.appointmentType, patientRecordData.provideName)
@@ -16,7 +16,7 @@ customTest("Schedule Appointment", async ({ sechduleAppointment, notification, s
     await deleteData.deletePropertyFromJsonFile(patientRecordData.patientId1)
 });
 
-customTest("Start Visit", async ({ startVisit, notification, patientRecordPage, deleteData }, testInfo) => {
+customTest("Start Visit @searchPatient", async ({ startVisit, notification, patientRecordPage, deleteData }, testInfo) => {
     console.log(testInfo.title);
     await patientRecordPage.searchPatient(patientRecordData.patientId2)
     await startVisit.visit()
@@ -24,7 +24,7 @@ customTest("Start Visit", async ({ startVisit, notification, patientRecordPage, 
     await deleteData.deletePropertyFromJsonFile(patientRecordData.patientId2)
 });
 
-customTest('Delete Patient', async ({ deletePatient, notification, patientRecordPage, deleteData }, testInfo) => {
+customTest('Delete Patient @delete', async ({ deletePatient, notification, patientRecordPage, deleteData }, testInfo) => {
     console.log(testInfo.title);
     await patientRecordPage.searchPatient(patientRecordData.patientId3)
     await deletePatient.delete(patientRecordData.reason)
