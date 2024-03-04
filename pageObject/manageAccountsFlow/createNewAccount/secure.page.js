@@ -2,9 +2,6 @@ class SecurePageForCreateNewAccount {
     constructor(page) {
         this.page = page
     }
-    static createInstance(page) {
-        return new SecurePageForCreateNewAccount(page)
-    }
     get passwordLessThanEightCharacter() {
         return this.page.getByText('At least 8 character(s) are required')
     }

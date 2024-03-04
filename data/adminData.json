@@ -1,5 +1,6 @@
 {
-    "adminUsername":"Admin",
-    "adminPassword":"Admin123",
-    "expectedStringForAdminLogin":"Logged in as Super User (admin) at Registration Desk."
+    "adminUsername": "Admin",
+    "adminPassword": "Admin123",
+    "expectedStringForAdminLogin": "Logged in as Super User (admin) at Registration Desk.",
+    "location": "Registration Desk"
 }

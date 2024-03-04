@@ -1,8 +1,9 @@
 const base = require('@playwright/test')
-const notification = require('../pageObject/notification/notification')
-const securePageForAddPatient = require('../pageObject/addPatientFlow/addPatient/secureAddPatient')
-const addPatient = require('../pageObject/addPatientFlow/addPatient/addPatientDetails')
-const sechduleAppointment = require('../pageObject/addPatientFlow/sechduleAppointment/sechduleAppointment.js')
+const { chromium } = require('playwright');
+import Notification from '../pageObject/notification/notification'
+import AddPatient from '../pageObject/addPatient/addPatientDetails'
+import HomePage from '../pageObject/homePageFlow/homePage.js'
+import SecurePageForHomePage from '../pageObject/homePageFlow/securePageForHomePage'
 
 exports.customTest = base.test.extend({
     testDataForAddPatient: {
@@ -23,17 +24,29 @@ exports.customTest = base.test.extend({
         relativeOccupation: "Doctor",
         relativeName: "Noob"
     },
-    notification: async ({ page }, use) => {
-        await use(notification.createInstance(page));
+    browser: async ({ }, use) => {
+        const browser = await chromium.launch();
+        await use(browser)
     },
-    securePageForAddPatient: async ({ page }, use) => {
-        await use(securePageForAddPatient.createInstance(page))
+    context: async ({browser}, use) => {
+        const context = await browser.newContext();
+        await use(context)
+    },
+    page: async ({ context }, use) => {
+        const page = await context.newPage()
+        await page.goto('/')
+        await use(page)
+    },
+    homePage: async ({ page }, use) => {
+        await use(new HomePage(page))
+    },
+    securePageForHomePage: async ({ page }, use) => {
+        await use(new SecurePageForHomePage(page))
+    },
+    notification: async ({ page }, use) => {
+        await use(new Notification(page));
     },
     addPatient: async ({ page }, use) => {
-        await use(addPatient.createInstance(page))
-    },
-    sechduleAppointment: async ({ page }, use) => {
-        await use(sechduleAppointment.createInstance(page))
-    },
-
+        await use(new AddPatient(page))
+    }
 })

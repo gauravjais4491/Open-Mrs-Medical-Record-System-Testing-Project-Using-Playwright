@@ -1,34 +1,27 @@
-const { test, expect, chromium } = require("@playwright/test")
+const { expect } = require("@playwright/test")
+const { customTest } = require('../fixtures/loginFixture')
 const userData = require('../data/userData.json')
 const expectedString = require('../data/expectedStringData.json')
 const adminData = require('../data/adminData.json')
-const LoginPage = require('../pageObject/loginPage/loginPage.js')
-const SecurePageForLogin = require('../pageObject/loginPage/securePageForLogin')
 
-
-test('should login', async (testInfo) => {
-    const browser = await chromium.launch();
-    const context = await browser.newContext();
+customTest.beforeEach(async ({ context }) => {
     await context.clearCookies()
-    const page = await context.newPage();
-    const loginPage = LoginPage.createInstance(page)
-    const securePageForLogin = SecurePageForLogin.createInstance(page)
-    await page.goto(userData.url)
+})
+
+
+customTest('should login', async ({ loginPage, securePageForLogin }, testInfo) => {
+    console.log(testInfo.title);
     await loginPage.login(userData.username, userData.password, userData.location)
-    expect.soft(await securePageForLogin.flashLoginSuccessfull()).toContain(expectedString.expectTextForLoginSuccessfull)
-    console.log(testInfo.title);
+    expect(await securePageForLogin.flashLoginSuccessfull()).toContain(expectedString.expectTextForLoginSuccessfull)
 })
 
-test('should login with admin', async (testInfo) => {
-    const browser = await chromium.launch();
-    const context = await browser.newContext();
-    await context.clearCookies()
-    const page = await context.newPage();
-    const loginPage = LoginPage.createInstance(page)
-    const securePageForLogin = SecurePageForLogin.createInstance(page)
-    await page.goto(userData.url)
+customTest('should login with admin', async ({ loginPage, securePageForLogin }, testInfo) => {
+    console.log(testInfo.title);
     await loginPage.login(adminData.adminUsername, adminData.adminPassword, userData.location)
-    expect.soft(await securePageForLogin.flashLoginSuccessfull()).toContain(expectedString.expectTextForLoginSuccessfull)
-    console.log(testInfo.title);
+    expect(await securePageForLogin.flashLoginSuccessfull()).toContain(expectedString.expectTextForLoginSuccessfull)
 })
 
+
+customTest.afterEach('Clean Up', async ({ browser }) => {
+    await browser.close()
+})

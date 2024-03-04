@@ -11,9 +11,12 @@
     "@playwright/test": "^1.41.2",
     "@types/node": "^20.11.5",
     "allure-playwright": "^2.11.1",
+    "dotenv": "^16.4.3",
     "eslint-plugin-playwright": "^0.22.1"
   },
   "dependencies": {
-    "faker": "^5.5.3"
+    "faker": "^5.5.3",
+    "fs": "^0.0.1-security",
+    "playwright": "^1.41.2"
   }
 }

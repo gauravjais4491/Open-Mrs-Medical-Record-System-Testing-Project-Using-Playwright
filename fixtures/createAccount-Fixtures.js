@@ -1,33 +1,38 @@
 const base = require('@playwright/test')
-const createNewAccount = require('../pageObject/manageAccountsFlow/createNewAccount/createNewAccount')
-const notification = require('../pageObject/notification/notification')
-const securePageForCreateNewAccount = require('../pageObject/manageAccountsFlow/createNewAccount/secure.page')
-const userData = require('../data/userData.json')
-const generateData = require('../data/GenerateData')
+const { chromium } = require('playwright');
+import CreateNewAccount from '../pageObject/manageAccountsFlow/createNewAccount/createNewAccount'
+import Notification from '../pageObject/notification/notification'
+import SecurePageForCreateNewAccount from '../pageObject/manageAccountsFlow/createNewAccount/secure.page'
+import GenerateData from '../data/GenerateData'
 
 exports.customTest = base.test.extend({
-    createNewAccount: async ({ page, createInstanceForNewAccount }, use) => {
-        await page.goto(userData.url);
+    createNewAccount: async ({ createInstanceForNewAccount }, use) => {
         await createInstanceForNewAccount.goToSystemAdministrationPage()
         await createInstanceForNewAccount.goToManageAccountsPage()
         await use(createInstanceForNewAccount);
     },
-    // givenName: async ({ createInstanceForGenerateData }, use) => {
-    //     await use(createInstanceForGenerateData.generateGivenName())
-
-    // },
+    browser: async ({ }, use) => {
+        const browser = await chromium.launch();
+        await use(browser)
+    },
+    context: async ({ browser }, use) => {
+        const context = await browser.newContext();
+        await use(context)
+    },
+    page: async ({ context }, use) => {
+        const page = await context.newPage()
+        await use(page)
+    },
     createInstanceForNewAccount: async ({ page }, use) => {
-        await use(createNewAccount.createInstance(page))
+        await use(new CreateNewAccount(page))
     },
     notification: async ({ page }, use) => {
-        await use(notification.createInstance(page));
+        await use(new Notification(page));
     },
-
-    // why to pass argument
-    generateData: async ({ page }, use) => {
-        await use(generateData.createInstance(page))
+    generateData: async ({ }, use) => {
+        await use(new GenerateData())
     },
     securePageForCreateNewAccount: async ({ page }, use) => {
-        await use(securePageForCreateNewAccount.createInstance(page))
+        await use(new SecurePageForCreateNewAccount(page))
     }
 })

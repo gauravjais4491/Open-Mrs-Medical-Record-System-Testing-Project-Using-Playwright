@@ -2,9 +2,6 @@ class CreateNewAccount {
     constructor(page) {
         this.page = page;
     }
-    static createInstance(page) {
-        return new CreateNewAccount(page)
-    }
     get systemAdministrationButton() {
         return this.page.getByText("System Administration")
     }
@@ -56,18 +53,15 @@ class CreateNewAccount {
 
     async goToSystemAdministrationPage() {
         await this.systemAdministrationButton.click()
-        return this
     }
     async goToManageAccountsPage() {
         await this.manageAccountButton.click()
-        return this
     }
     async addPersonDetails(familyName, givenName, gender) {
         await this.addNewAccountButton.click()
         await this.adminFamilyName.fill(familyName)
         await this.adminGivenName.fill(givenName)
         await this.adminGender(gender).click()
-        return this
     }
     async addUserAccountDetails(givenName, privilegeLevelText, password, confirmPassword) {
         await this.addUserAccount.click()
@@ -76,25 +70,20 @@ class CreateNewAccount {
         await this.privilegeLevel.selectOption(privilegeLevelText)
         await this.password.fill(password)
         await this.confirmPassword.fill(confirmPassword)
-        return this
     }
     async addCapablitiesToUserAccount(capabilities) {
         for (const item of capabilities) {
             await this.addCapablities(item).click()
         }
-        return this
     }
     async addProviderDetails(idenfier, providerRoleText) {
         await this.providerDetails.click()
         await this.identifer.fill(idenfier)
         await this.providerRole.click()
         await this.providerRole.selectOption(providerRoleText)
-        return this
-
     }
     async saveDetailsBtn() {
         await this.saveDetails.click()
-        return this
     }
 }
 module.exports = CreateNewAccount;
