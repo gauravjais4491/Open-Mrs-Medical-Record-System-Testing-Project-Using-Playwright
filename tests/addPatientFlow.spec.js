@@ -3,6 +3,7 @@ const expectedString = require('../data/expectedStringData.json')
 const { customTest } = require('../fixtures/addPatient-Fixtures')
 
 
+
 customTest("Add Patient Flow", async ({ testDataForAddPatient, addPatient, notification, homePage, securePageForHomePage }, testInfo) => {
     console.log(testInfo.title);
     await test.step("should go to add patient details page", async () => {
@@ -26,5 +27,3 @@ customTest("Add Patient Flow", async ({ testDataForAddPatient, addPatient, notif
 customTest.afterEach('Clean Up', async ({ browser }) => {
     await browser.close()
 })
-
-// How to clean up if I am creating broweser/page fixtures in different file as passing browser/page as fixtures. do I need to create of genearte browser/page instance in test file?

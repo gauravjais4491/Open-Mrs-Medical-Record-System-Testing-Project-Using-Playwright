@@ -31,3 +31,8 @@ customTest('Delete Patient', async ({ deletePatient, notification, patientRecord
     expect(await notification.flashNotification()).toContain(expectedString.expectTextForDeletePatientSucessfully)
     await deleteData.deletePropertyFromJsonFile(patientRecordData.patientId3)
 })
+
+
+customTest.afterEach('Clean Up', async ({ browser }) => {
+    await browser.close()
+})

@@ -6,7 +6,7 @@ import SecurePageForCreateNewAccount from '../pageObject/manageAccountsFlow/crea
 import GenerateData from '../data/GenerateData'
 
 exports.customTest = base.test.extend({
-    createNewAccount: async ({ page, createInstanceForNewAccount }, use) => {
+    createNewAccount: async ({ createInstanceForNewAccount }, use) => {
         await createInstanceForNewAccount.goToSystemAdministrationPage()
         await createInstanceForNewAccount.goToManageAccountsPage()
         await use(createInstanceForNewAccount);
@@ -21,7 +21,6 @@ exports.customTest = base.test.extend({
     },
     page: async ({ context }, use) => {
         const page = await context.newPage()
-        await page.goto('/')
         await use(page)
     },
     createInstanceForNewAccount: async ({ page }, use) => {
@@ -30,7 +29,6 @@ exports.customTest = base.test.extend({
     notification: async ({ page }, use) => {
         await use(new Notification(page));
     },
-
     generateData: async ({ }, use) => {
         await use(new GenerateData())
     },
