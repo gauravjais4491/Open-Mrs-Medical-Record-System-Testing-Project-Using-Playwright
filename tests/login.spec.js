@@ -4,9 +4,8 @@ const userData = require('../data/userData.json')
 const expectedString = require('../data/expectedStringData.json')
 const adminData = require('../data/adminData.json')
 
-customTest.beforeEach(async ({ context, page }) => {
+customTest.beforeEach(async ({ context }) => {
     await context.clearCookies()
-    await page.goto('/')
 })
 
 

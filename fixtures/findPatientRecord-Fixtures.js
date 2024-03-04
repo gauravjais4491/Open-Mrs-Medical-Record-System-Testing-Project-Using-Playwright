@@ -1,4 +1,5 @@
 const base = require('@playwright/test')
+const { chromium } = require('playwright');
 import Notification from '../pageObject/notification/notification.js'
 import SechduleAppointment from '../pageObject/findPatientRecord/sechduleAppointment/sechduleAppointment.js'
 import StartVisit from '../pageObject/findPatientRecord/startVisitFlow/startVisit.js'
@@ -13,7 +14,17 @@ exports.customTest = base.test.extend({
     sechduleAppointment: async ({ page }, use) => {
         await use(new SechduleAppointment(page))
     },
-    page: async ({ page }, use) => {
+    browser: async ({ }, use) => {
+        const browser = await chromium.launch();
+        await use(browser)
+    },
+    context: async ({ browser }, use) => {
+        const context = await browser.newContext();
+        await use(context)
+    },
+    page: async ({ context }, use) => {
+        const page = await context.newPage()
+        await page.goto('/')
         await use(page)
     },
 

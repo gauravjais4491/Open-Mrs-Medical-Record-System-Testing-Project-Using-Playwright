@@ -1,4 +1,5 @@
 const base = require('@playwright/test')
+const { chromium } = require('playwright');
 import Notification from '../pageObject/notification/notification'
 import AddPatient from '../pageObject/addPatient/addPatientDetails'
 import HomePage from '../pageObject/homePageFlow/homePage.js'
@@ -23,7 +24,17 @@ exports.customTest = base.test.extend({
         relativeOccupation: "Doctor",
         relativeName: "Noob"
     },
-    page: async ({ page }, use) => {
+    browser: async ({ }, use) => {
+        const browser = await chromium.launch();
+        await use(browser)
+    },
+    context: async ({browser}, use) => {
+        const context = await browser.newContext();
+        await use(context)
+    },
+    page: async ({ context }, use) => {
+        const page = await context.newPage()
+        await page.goto('/')
         await use(page)
     },
     homePage: async ({ page }, use) => {

@@ -13,7 +13,7 @@ const globalTeardown = async () => {
         for (let i = 1; i <= 3; i++) {
             const patientId = Object.keys(patientRecordData)
             console.log(patientId);
-            // await deleteData.deletePropertyFromJsonFile(patientId);
+            await deleteData.deletePropertyFromJsonFile(patientId);
         }
     } catch (error) {
         console.error('Error during global teardown:', error);

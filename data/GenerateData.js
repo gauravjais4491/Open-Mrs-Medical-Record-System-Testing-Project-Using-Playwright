@@ -1,7 +1,6 @@
 const faker = require('faker');
 class GenerateData {
-    constructor(page) {
-        this.page = page
+    constructor() {
         this.usernameRegex = /^[a-zA-Z0-9._-]{2,50}$/;
     }
     async generateGivenName() {

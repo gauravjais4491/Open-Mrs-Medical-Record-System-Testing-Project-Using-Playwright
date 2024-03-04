@@ -1,4 +1,5 @@
 const base = require('@playwright/test')
+const { chromium } = require('playwright');
 import CreateNewAccount from '../pageObject/manageAccountsFlow/createNewAccount/createNewAccount'
 import Notification from '../pageObject/notification/notification'
 import SecurePageForCreateNewAccount from '../pageObject/manageAccountsFlow/createNewAccount/secure.page'
@@ -6,12 +7,21 @@ import GenerateData from '../data/GenerateData'
 
 exports.customTest = base.test.extend({
     createNewAccount: async ({ page, createInstanceForNewAccount }, use) => {
-        await page.goto('/');
         await createInstanceForNewAccount.goToSystemAdministrationPage()
         await createInstanceForNewAccount.goToManageAccountsPage()
         await use(createInstanceForNewAccount);
     },
-    page: async ({ page}, use) => {
+    browser: async ({ }, use) => {
+        const browser = await chromium.launch();
+        await use(browser)
+    },
+    context: async ({ browser }, use) => {
+        const context = await browser.newContext();
+        await use(context)
+    },
+    page: async ({ context }, use) => {
+        const page = await context.newPage()
+        await page.goto('/')
         await use(page)
     },
     createInstanceForNewAccount: async ({ page }, use) => {
@@ -21,9 +31,8 @@ exports.customTest = base.test.extend({
         await use(new Notification(page));
     },
 
-    // why to pass argument
-    generateData: async ({ page }, use) => {
-        await use(new GenerateData(page))
+    generateData: async ({ }, use) => {
+        await use(new GenerateData())
     },
     securePageForCreateNewAccount: async ({ page }, use) => {
         await use(new SecurePageForCreateNewAccount(page))

@@ -9,12 +9,12 @@ class Notification {
         let notificationText = null;
         while (notificationText === null) {
             try {
-                notificationText = await this.notification.textContent({ timeout: 500 });
+                notificationText = await this.notification.textContent({ timeout: 50 });
             } catch (e) {
                 continue;
             }
-            return notificationText;
         }
+        return notificationText;
     }
 }
 module.exports = Notification

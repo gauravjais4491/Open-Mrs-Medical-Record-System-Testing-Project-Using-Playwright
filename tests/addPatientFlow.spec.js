@@ -3,10 +3,9 @@ const expectedString = require('../data/expectedStringData.json')
 const { customTest } = require('../fixtures/addPatient-Fixtures')
 
 
-customTest("Add Patient Flow", async ({ testDataForAddPatient, addPatient, notification, page, homePage, securePageForHomePage }, testInfo) => {
+customTest("Add Patient Flow", async ({ testDataForAddPatient, addPatient, notification, homePage, securePageForHomePage }, testInfo) => {
     console.log(testInfo.title);
     await test.step("should go to add patient details page", async () => {
-        await page.goto('/')
         await homePage.goToPatientDetailsPage()
         expect(await securePageForHomePage.flashNotification()).toContain(expectedString.expectTextForAddPatientDetailsPage);
     });
@@ -19,6 +18,13 @@ customTest("Add Patient Flow", async ({ testDataForAddPatient, addPatient, notif
         await addPatient.addPhoneNumber(testDataForAddPatient.patientPhoneNumber)
         await addPatient.addRelationType(testDataForAddPatient.relativeOccupation, testDataForAddPatient.relativeName)
         await addPatient.confirmDetails()
-        expect(await notification.flashNotification()).toContain(expectedString.expectTextForSucessfullyPatientRegistered)
+        const text = await notification.flashNotification()
+        expect(text).toContain(expectedString.expectTextForSucessfullyPatientRegistered)
     });
 })
+
+customTest.afterEach('Clean Up', async ({ browser }) => {
+    await browser.close()
+})
+
+// How to clean up if I am creating broweser/page fixtures in different file as passing browser/page as fixtures. do I need to create of genearte browser/page instance in test file?

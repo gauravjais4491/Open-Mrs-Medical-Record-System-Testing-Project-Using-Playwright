@@ -3,8 +3,7 @@ const expectedString = require('../data/expectedStringData.json')
 const { customTest } = require('../fixtures/findPatientRecord-Fixtures')
 import patientRecordData from '../data/patientRecord.json'
 
-customTest.beforeEach(async ({ homePage, page }) => {
-    await page.goto('/')
+customTest.beforeEach(async ({ homePage }) => {
     await homePage.goToPatientRecordPage()
 })
 
