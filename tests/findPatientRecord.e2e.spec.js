@@ -7,14 +7,6 @@ customTest.beforeEach(async ({ homePage }) => {
     await homePage.goToPatientRecordPage()
 })
 
-customTest("Schedule Appointment @sechdule", async ({ sechduleAppointment, notification, securePageForSechduleAppointment, patientRecordPage, deleteData }) => {
-    await patientRecordPage.searchPatient(patientRecordData.patientId1)
-    await expect(await securePageForSechduleAppointment.flashAlert()).not.toBeVisible()
-    await sechduleAppointment.addAppointmentDetails(patientRecordData.appointmentType, patientRecordData.provideName)
-    // expect(await notification.flashNotification()).toContain(expectedString.expectTextForSucessfullySechduledAppointment)
-    await expect(await securePageForSechduleAppointment.flashAlert()).toBeVisible()
-    await deleteData.deletePropertyFromJsonFile(patientRecordData.patientId1)
-});
 
 customTest("Start Visit @searchPatient", async ({ startVisit, notification, patientRecordPage, deleteData }, testInfo) => {
     console.log(testInfo.title);
@@ -32,6 +24,18 @@ customTest('Delete Patient @delete', async ({ deletePatient, notification, patie
     await deleteData.deletePropertyFromJsonFile(patientRecordData.patientId3)
 })
 
+customTest('Schedule Appointment @sechdule', async ({ browserName, sechduleAppointment, notification, securePageForSechduleAppointment, patientRecordPage, deleteData }) => {
+    // contidition based fail
+    // customTest.fail(browserName === 'webkit', 'This feature is not implemented for Mac yet');
+    // always fail
+    // customTest.fail()
+    await patientRecordPage.searchPatient(patientRecordData.patientId1)
+    await expect(await securePageForSechduleAppointment.flashAlert()).not.toBeVisible()
+    await sechduleAppointment.addAppointmentDetails(patientRecordData.appointmentType, patientRecordData.provideName)
+    // expect(await notification.flashNotification()).toContain(expectedString.expectTextForSucessfullySechduledAppointment)
+    await expect(await securePageForSechduleAppointment.flashAlert()).toBeVisible()
+    await deleteData.deletePropertyFromJsonFile(patientRecordData.patientId1)
+})
 
 customTest.afterEach('Clean Up', async ({ browser }) => {
     await browser.close()
