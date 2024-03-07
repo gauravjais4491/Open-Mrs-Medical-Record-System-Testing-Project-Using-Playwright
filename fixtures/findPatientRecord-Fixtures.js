@@ -8,18 +8,18 @@ import PatientRecordPage from '../pageObject/findPatientRecord/patientRecordPage
 import DeletePatient from '../pageObject/findPatientRecord/deletePatientFlow/deletePatient.js'
 import SecurePageForSechduleAppointment from '../pageObject/findPatientRecord/sechduleAppointment/securePageForSechduleAppointment.js'
 import DeleteData from '../HandleJsonData/deleteData.js'
+import BrowserInstance from '../browserInstance.js';
 
 
 exports.customTest = base.test.extend({
     sechduleAppointment: async ({ page }, use) => {
         await use(new SechduleAppointment(page))
     },
-    browser: async ({ }, use) => {
-        const browser = await chromium.launch();
-        await use(browser)
+    browserInstance: async ({ }, use) => {
+        await use(new BrowserInstance(chromium))
     },
-    context: async ({ browser }, use) => {
-        const context = await browser.newContext();
+    context: async ({ browserInstance }, use) => {
+        const context = await browserInstance.createContext()
         await use(context)
     },
     page: async ({ context }, use) => {

@@ -4,6 +4,8 @@ import Notification from '../pageObject/notification/notification'
 import AddPatient from '../pageObject/addPatient/addPatientDetails'
 import HomePage from '../pageObject/homePageFlow/homePage.js'
 import SecurePageForHomePage from '../pageObject/homePageFlow/securePageForHomePage'
+import BrowserInstance from '../browserInstance.js';
+
 
 exports.customTest = base.test.extend({
     testDataForAddPatient: {
@@ -24,12 +26,12 @@ exports.customTest = base.test.extend({
         relativeOccupation: "Doctor",
         relativeName: "Noob"
     },
-    browser: async ({ }, use) => {
-        const browser = await chromium.launch();
-        await use(browser)
+
+    browserInstance: async ({ }, use) => {
+        await use(new BrowserInstance(chromium))
     },
-    context: async ({browser}, use) => {
-        const context = await browser.newContext();
+    context: async ({ browserInstance }, use) => {
+        const context = await browserInstance.createContext()
         await use(context)
     },
     page: async ({ context }, use) => {

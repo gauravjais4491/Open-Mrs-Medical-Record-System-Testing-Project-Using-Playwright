@@ -3,11 +3,11 @@ const { customTest } = require('../fixtures/loginFixture')
 const userData = require('../data/userData.json')
 const expectedString = require('../data/expectedStringData.json')
 const adminData = require('../data/adminData.json')
+import test from "@playwright/test"
 
-customTest.beforeEach(async ({ context }) => {
+test.beforeEach(async ({ context }) => {
     await context.clearCookies()
 })
-
 
 customTest('should login', async ({ loginPage, securePageForLogin }, testInfo) => {
     console.log(testInfo.title);
@@ -19,9 +19,4 @@ customTest('should login with admin', async ({ loginPage, securePageForLogin }, 
     console.log(testInfo.title);
     await loginPage.login(adminData.adminUsername, adminData.adminPassword, userData.location)
     expect(await securePageForLogin.flashLoginSuccessfull()).toContain(expectedString.expectTextForLoginSuccessfull)
-})
-
-
-customTest.afterEach('Clean Up', async ({ browser }) => {
-    await browser.close()
 })

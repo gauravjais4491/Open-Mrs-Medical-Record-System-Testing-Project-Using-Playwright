@@ -4,6 +4,7 @@ import CreateNewAccount from '../pageObject/manageAccountsFlow/createNewAccount/
 import Notification from '../pageObject/notification/notification'
 import SecurePageForCreateNewAccount from '../pageObject/manageAccountsFlow/createNewAccount/secure.page'
 import GenerateData from '../data/GenerateData'
+import BrowserInstance from '../browserInstance.js';
 
 exports.customTest = base.test.extend({
     createNewAccount: async ({ createInstanceForNewAccount }, use) => {
@@ -11,12 +12,11 @@ exports.customTest = base.test.extend({
         await createInstanceForNewAccount.goToManageAccountsPage()
         await use(createInstanceForNewAccount);
     },
-    browser: async ({ }, use) => {
-        const browser = await chromium.launch();
-        await use(browser)
+    browserInstance: async ({ }, use) => {
+        await use(new BrowserInstance(chromium))
     },
-    context: async ({ browser }, use) => {
-        const context = await browser.newContext();
+    context: async ({ browserInstance }, use) => {
+        const context = await browserInstance.createContext()
         await use(context)
     },
     page: async ({ context }, use) => {

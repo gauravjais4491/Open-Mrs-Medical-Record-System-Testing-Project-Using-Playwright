@@ -3,7 +3,6 @@ const expectedString = require('../data/expectedStringData.json')
 const { customTest } = require('../fixtures/addPatient-Fixtures')
 
 
-
 customTest("Add Patient Flow", async ({ testDataForAddPatient, addPatient, notification, homePage, securePageForHomePage }, testInfo) => {
     console.log(testInfo.title);
     await test.step("should go to add patient details page", async () => {
@@ -22,8 +21,4 @@ customTest("Add Patient Flow", async ({ testDataForAddPatient, addPatient, notif
         const text = await notification.flashNotification()
         expect(text).toContain(expectedString.expectTextForSucessfullyPatientRegistered)
     });
-})
-
-customTest.afterEach('Clean Up', async ({ browser }) => {
-    await browser.close()
 })
