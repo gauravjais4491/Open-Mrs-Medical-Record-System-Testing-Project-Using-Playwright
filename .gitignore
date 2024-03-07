@@ -6,6 +6,5 @@ node_modules/
 /package-lock.json
 /playwright.config.js
 /LoginAuthCQ.json
-
-
+/my-allure-results/
 
