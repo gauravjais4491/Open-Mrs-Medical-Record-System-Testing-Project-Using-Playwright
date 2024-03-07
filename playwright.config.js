@@ -33,7 +33,7 @@ module.exports = defineConfig({
   //     },
   //   ],
   // ],
-  // timeout: 10 * 10 * 1000,
+  timeout: 100000,
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('/')`. */
@@ -42,6 +42,7 @@ module.exports = defineConfig({
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
     headless: true,
+    screenshot:'only-on-failure'
   },
 
   /* Configure projects for major browsers */
@@ -58,7 +59,7 @@ module.exports = defineConfig({
         ...devices['Desktop Chrome'],
         colorScheme: 'dark',
         storageState: './LoginAuthCQ.json',
-        viewport: { width: 1440, height: 900 } // Set viewport size for all browser contexts
+        viewport: { width: 700, height: 450 } // Set viewport size for all browser contexts
       },
     },
 
