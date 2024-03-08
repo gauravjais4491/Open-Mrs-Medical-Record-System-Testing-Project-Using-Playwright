@@ -23,7 +23,8 @@ const globalSetup = async () => {
     const saveData = new SaveData(page)
     const createNewAccount = new CreateNewAccount(page)
     const notification = new Notification(page)
-    await page.goto('https://demo.openmrs.org/openmrs/login.htm',{waitUntil:'networkidle0'})
+    await page.goto('https://demo.openmrs.org/openmrs/login.htm', { waitUntil: 'networkidle' })
+    await page.screenshot('./screenshot.png')
     try {
         await loginPage.login(userData.username, userData.password, userData.location)
         expect(await securePageForLogin.flashLoginSuccessfull()).toContain(expectedString.expectTextForLoginSuccessfull)
